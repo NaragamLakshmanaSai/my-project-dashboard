@@ -12,12 +12,12 @@ import "./App.css";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBr0hgQgumLva-R5w4Wetkcm4NYtsdt8zA",
-  authDomain: "polar-protocol-357117.firebaseapp.com",
-  projectId: "polar-protocol-357117",
-  storageBucket: "polar-protocol-357117.appspot.com",
-  messagingSenderId: "99823031321",
-  appId: "1:99823031321:web:23b5d6daec7e2e61794688"
+  apiKey: "AIzaSyD0vy4ru9V3GaTgrzcnUym1XmRFnVkosy4",
+  authDomain: "my-project-auth-69218.firebaseapp.com",
+  projectId: "my-project-auth-69218",
+  storageBucket: "my-project-auth-69218.appspot.com",
+  messagingSenderId: "115583969302",
+  appId: "1:115583969302:web:abfb5be0ced8224aa9ad37"
 };
 
 

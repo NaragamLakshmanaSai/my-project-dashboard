@@ -29,7 +29,7 @@ const PublishArticlePage = () => {
             <label> Content:
             <textarea type="text" value={content} onChange={(e) => setContent(e.target.value)} style={{height: '310px', width: '700px', resize: 'none'}}/>
             </label>
-            <button onClick={async() => { console.log(type); await axios.put(`http://localhost:3020/publish-article`, {type, name, title, content}); setName(""); setTitle(""); setContent(""); setRefreshPage(!refreshPage)}}>Publish Article</button>
+            <button onClick={async() => { await axios.put(`http://localhost:3020/publish-article`, {type, name, title, content}); setName(""); setTitle(""); setContent(""); setRefreshPage(!refreshPage)}}>Publish Article</button>
         </div>
     )
 }

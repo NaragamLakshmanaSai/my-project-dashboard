@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import UseAuth from "../hooks/UserAuth"
+import { useNavigate } from "react-router-dom";
 
 const ArticlePage = () => {
     const [article, setArticle] = useState({title: "jeelo", content: ["ajlf", "fkjdflk"]})
@@ -9,6 +10,7 @@ const ArticlePage = () => {
     const [userName, setUserName] = useState("")
     const [refreshPage, setRefreshPage] = useState(false)
     const { type, id } = useParams()
+    const navigate = useNavigate();
 
     const { user } = UseAuth()
     console.log(">>>>>>user", user);
@@ -25,9 +27,11 @@ const ArticlePage = () => {
 
     return(
         <>
-        <h1>{article.title}</h1>
+        <h1 style={{display:'inline', marginRight: '20px'}}>{article.title}</h1>
+        <button style={{backgroundColor: 'red'}} onClick={async()=>{await axios.put(`http://localhost:3020/articles/${type}/${id}/delete`); console.log(">>>Delter"); navigate('/articles')}}>Delete Article</button>
         {article.content.map((par, i) => <p key={i}>{par}</p>)}
         <button onClick={async()=>{await axios.put(`http://localhost:3020/articles/${type}/${id}/like_and_comment`, {like: 1}); setRefreshPage(!refreshPage)}}>Like</button>
+        <br></br>
         <p>This article has {article.likes} like(s)</p>
         <h3>Add Comment</h3>
         <div id="add-comment-form">
