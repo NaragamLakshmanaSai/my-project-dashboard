@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const About = () => {
     return(
@@ -22,6 +23,12 @@ const About = () => {
             <li><a href="https://www.hackerrank.com/lakshmansainls11" target="_blank">HackerRank</a></li>
             <br></br>
             <li><a href="https://auth.geeksforgeeks.org/user/naragam11906183/profile" target="_blank">Geeks For Geeks</a></li>
+            </ul>
+            <h1>Contact</h1>
+            <ul>
+                <li><b>Email: </b><a href='mailto:lakshmansainls123@gmail.com'>lakshmansainls123@gmail.com</a></li>
+                <br></br>
+                <li><b>Phone Number: </b><a href='tel:9948785984'> 9948785984 </a></li>
             </ul>
         </>
     )

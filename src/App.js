@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import About from "./Pages/About";
@@ -10,6 +11,9 @@ import NavBar from "./NavBar";
 import "./App.css";
 
 import { initializeApp } from "firebase/app";
+import Profile from "./Pages/Profile";
+import AccessWrapper from "./accessWrapper";
+import ApproveArticlesPage from "./Pages/ApproveArticlesPag";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD0vy4ru9V3GaTgrzcnUym1XmRFnVkosy4",
@@ -35,6 +39,7 @@ const App = () => {
             <Route path="/articles" element={<ArticlesListPage />} />
             <Route path="/articles/:type/:id" element={<ArticlePage />} />
             <Route path="/publish-article" element={<PublishArticlePage />} />
+            <Route path="/approve-articles" element={AccessWrapper(ApproveArticlesPage, ["publish_article"])} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/create-account" element={<CreateAccountPage/>} />
           </Routes>

@@ -2,7 +2,7 @@ import axios from "axios"
 import React, {useState, useEffect} from "react"
 import { Link, useSearchParams } from "react-router-dom"
 
-const ArticlesListPage = () => {
+const ApproveArticlesPage = () => {
     const [articles, setArticles] = useState([])
     const [articlesType, setArticlesType] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
@@ -29,7 +29,7 @@ const ArticlesListPage = () => {
         }
 
         const getArticles = async() => {
-            const articlesResponse = await axios.post(`http://localhost:3020/articles/${articlesType}/?approved=${true}`,{filter})
+            const articlesResponse = await axios.post(`http://localhost:3020/articles/${articlesType}/?approved=${false}`,{filter})
             setArticles(articlesResponse.data)
         }
 
@@ -62,4 +62,4 @@ const ArticlesListPage = () => {
     )
 }
 
-export default ArticlesListPage
+export default ApproveArticlesPage
