@@ -43,10 +43,10 @@ const ArticlePage = () => {
             <label> Comment:
             <textarea type="text" value={addComment} onChange={(e) => setAddComment(e.target.value)} />
             </label>
-            <button onClick={async() => {await axios.put(`http://localhost:3020/articles/${type}/${id}/like_comment_approve`, {comment: addComment, userName: user.name}); setAddComment(""); setRefreshPage(!refreshPage)}}>Post Comment</button>
+            <button onClick={async() => {await axios.put(`http://localhost:3020/articles/${type}/${id}/like_comment_approve`, {comment: addComment, userName: user?.name}); setAddComment(""); setRefreshPage(!refreshPage)}}>Post Comment</button>
         </div>
         <h3>Comments</h3>
-        {article?.comments?.map((commentObj)=> <div className="comment"> <h4>{commentObj.userName}</h4> <p>{commentObj.comment}</p></div>)}
+        {article?.comments?.map((commentObj)=> <div className="comment"> <h4>{commentObj?.userName}</h4> <p>{commentObj.comment}</p></div>)}
         </>
     )
 }

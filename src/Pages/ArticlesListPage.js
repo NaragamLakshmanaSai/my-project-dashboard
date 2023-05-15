@@ -1,12 +1,17 @@
 import axios from "axios"
 import React, {useState, useEffect} from "react"
 import { Link, useSearchParams } from "react-router-dom"
+import Pagination from "../components/Pagination"
 
 const ArticlesListPage = () => {
     const [articles, setArticles] = useState([])
     const [articlesType, setArticlesType] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [filter, setFilter] = useState("")
+
+    const [pageNo, setPageNo] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
+    const [pageSize, setPageSize] = useState(2)
 
     const handleClick = (nextArticlesType) => {
         if(nextArticlesType===articlesType)
@@ -16,6 +21,7 @@ const ArticlesListPage = () => {
         if(nextArticlesType!==searchParams.get('type')){
             searchParams.set('type', nextArticlesType)
             setSearchParams(searchParams)
+            setPageNo(1)
         }
     }
 
@@ -29,12 +35,13 @@ const ArticlesListPage = () => {
         }
 
         const getArticles = async() => {
-            const articlesResponse = await axios.post(`http://localhost:3020/articles/${articlesType}/?approved=${true}`,{filter})
-            setArticles(articlesResponse.data)
+            const articlesResponse = await axios.post(`http://localhost:3020/articles/${articlesType}/?approved=${true}&pageNo=${pageNo}&pageSize=${pageSize}`,{filter})
+            setArticles(articlesResponse.data.articles)
+            setTotalPages(articlesResponse.data.totalPages)
         }
 
         getArticles()
-    },[articlesType, searchParams, filter])
+    },[articlesType, searchParams, filter, pageNo])
 
     return(
         <>            
@@ -58,6 +65,9 @@ const ArticlesListPage = () => {
                     </div>
                 )
             })}
+            <div style={{marginBottom: '10px'}}>
+                <Pagination pageNo={pageNo} setPageNo={setPageNo} totalPages={totalPages}/>
+            </div>
         </>
     )
 }

@@ -13,7 +13,7 @@ import "./App.css";
 import { initializeApp } from "firebase/app";
 import Profile from "./Pages/Profile";
 import AccessWrapper from "./accessWrapper";
-import ApproveArticlesPage from "./Pages/ApproveArticlesPag";
+import ApproveArticlesPage from "./Pages/ApproveArticlesPage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD0vy4ru9V3GaTgrzcnUym1XmRFnVkosy4",
