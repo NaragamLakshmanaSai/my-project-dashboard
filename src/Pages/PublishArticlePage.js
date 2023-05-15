@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const PublishArticlePage = () => {
     const [type, setType] = useState("")
@@ -29,7 +30,7 @@ const PublishArticlePage = () => {
             <label> Content:
             <textarea type="text" value={content} onChange={(e) => setContent(e.target.value)} style={{height: '310px', width: '700px', resize: 'none'}}/>
             </label>
-            <button onClick={async() => { await axios.put(`http://localhost:3020/publish-article`, {type, name, title, content}); setName(""); setTitle(""); setContent(""); setRefreshPage(!refreshPage)}}>Publish Article</button>
+            <button onClick={async() => { await axios.put(`${baseUrl}/publish-article`, {type, name, title, content}); setName(""); setTitle(""); setContent(""); setRefreshPage(!refreshPage)}}>Publish Article</button>
         </div>
     )
 }

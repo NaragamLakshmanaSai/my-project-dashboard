@@ -2,6 +2,8 @@ import { CPagination, CPaginationItem } from "@coreui/react"
 import axios from "axios"
 import React, {useState, useEffect} from "react"
 import { Link, useSearchParams } from "react-router-dom"
+import Pagination from "../components/Pagination"
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const ApproveArticlesPage = () => {
     const [articles, setArticles] = useState([])
@@ -35,7 +37,7 @@ const ApproveArticlesPage = () => {
         }
 
         const getArticles = async() => {
-            const articlesResponse = await axios.post(`http://localhost:3020/articles/${articlesType}/?approved=${false}&pageNo=${pageNo}&pageSize=${pageSize}`,{filter})
+            const articlesResponse = await axios.post(`${baseUrl}/articles/${articlesType}/?approved=${false}&pageNo=${pageNo}&pageSize=${pageSize}`,{filter})
             setArticles(articlesResponse.data.articles)
             setTotalPages(articlesResponse.data.totalPages)
         }
@@ -68,28 +70,9 @@ const ApproveArticlesPage = () => {
             
             }
             <br></br>
-            <span style={{position: 'absolute', alignSelf: 'flex-end'}}>
-                <CPagination>
-                    <CPaginationItem onClick={() => {setPageNo(1)}} disabled={pageNo<=1}>
-                    <span aria-hidden="true">&laquo;</span>
-                    </CPaginationItem>
-                    <CPaginationItem onClick={() => {setPageNo(pageNo - 1)}} disabled={pageNo < 2}>
-                    <span aria-hidden="true">&lt;</span>
-                    </CPaginationItem>
-                    {[...Array(totalPages).keys()]?.map((_, item) => (
-                    <CPaginationItem key={item + 1} onClick={() => {setPageNo(item + 1)}}
-                                    active={item === pageNo - 1}>{item + 1}</CPaginationItem>
-                    ))}
-                    <CPaginationItem onClick={() => {setPageNo(pageNo + 1)}}
-                                    disabled={pageNo > totalPages-1}>
-                    <span aria-hidden="true">&gt;</span>
-                    </CPaginationItem>
-                    <CPaginationItem onClick={() => {setPageNo(totalPages)}}
-                                    disabled={pageNo >= totalPages}>
-                    <span aria-hidden="true">&raquo;</span>
-                    </CPaginationItem>
-                </CPagination>
-            </span>
+            <div style={{marginBottom: '10px'}}>
+                <Pagination pageNo={pageNo} setPageNo={setPageNo} totalPages={totalPages}/>
+            </div>
         </>
     )
 }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const CreateAccountPage = () => {
     const [name, setName] = useState("")
@@ -21,8 +22,8 @@ const CreateAccountPage = () => {
             }
             
             await createUserWithEmailAndPassword(getAuth(), email, password)
-            await axios.put(`http://localhost:3020/user/create-account`, {name, phoneNumber, email, password})
-            const user  = await axios.post(`http://localhost:3020/user/login`, {email, password})
+            await axios.put(`${baseUrl}/user/create-account`, {name, phoneNumber, email, password})
+            const user  = await axios.post(`${baseUrl}/user/login`, {email, password})
             dispatch({ type: 'SET_USER', payload: user.data });
             navigate('/')
         }

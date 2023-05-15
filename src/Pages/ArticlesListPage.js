@@ -2,6 +2,7 @@ import axios from "axios"
 import React, {useState, useEffect} from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import Pagination from "../components/Pagination"
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const ArticlesListPage = () => {
     const [articles, setArticles] = useState([])
@@ -35,7 +36,7 @@ const ArticlesListPage = () => {
         }
 
         const getArticles = async() => {
-            const articlesResponse = await axios.post(`http://localhost:3020/articles/${articlesType}/?approved=${true}&pageNo=${pageNo}&pageSize=${pageSize}`,{filter})
+            const articlesResponse = await axios.post(`${baseUrl}/articles/${articlesType}/?approved=${true}&pageNo=${pageNo}&pageSize=${pageSize}`,{filter})
             setArticles(articlesResponse.data.articles)
             setTotalPages(articlesResponse.data.totalPages)
         }

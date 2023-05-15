@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import axios from "axios";
 import { useDispatch } from 'react-redux';
 import store from '../store';
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const LoginPage = () => {
     const handleLogin = async() => {
         try{
             await signInWithEmailAndPassword(getAuth(), email, password)
-            const user  = await axios.post(`http://localhost:3020/user/login`, {email, password})
+            const user  = await axios.post(`${baseUrl}/user/login`, {email, password})
             dispatch({ type: 'SET_USER', payload: user.data });
             navigate('/')
         }
